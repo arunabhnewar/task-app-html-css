@@ -71,7 +71,7 @@
               id="filterStatus"
               class="form-control"
               onchange="filterTasks()">
-              <option value="all">All</option>
+              <option value="all" selected disabled>All</option>
               <option value="to-do">To-do</option>
               <option value="in-progress">In Progress</option>
               <option value="done">Done</option>
@@ -84,7 +84,7 @@
               id="filterPriority"
               class="form-control"
               onchange="filterTasks()">
-              <option value="all">All</option>
+              <option value="all" selected disabled>All</option>
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>
@@ -97,7 +97,8 @@
               type="text"
               id="search"
               class="form-control"
-              oninput="filterTasks()" />
+              oninput="filterTasks()"
+              placeholder="Search Your Task" />
           </div>
         </div>
 

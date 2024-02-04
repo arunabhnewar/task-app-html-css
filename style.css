@@ -124,8 +124,14 @@ body {
   border: 1px solid #262626;
   background-color: #262626;
   color: #f2f2f2;
-  cursor: pointer;
+
   font-size: 13px;
+}
+
+.filter_section .form-group input::placeholder {
+  color: #808080;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .form-control:focus {
@@ -143,4 +149,10 @@ body {
   border: 1px solid #ddd;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+#taskCount {
+  text-align: center;
+  padding-top: 50px;
+  color: white;
 }
