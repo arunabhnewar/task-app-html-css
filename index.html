@@ -47,6 +47,9 @@
 
       <!-- Task Display and Interaction -->
       <div id="taskList"></div>
+
+      <!-- Task Count -->
+      <div id="taskCount"></div>
     </div>
 
     <script>
@@ -103,6 +106,11 @@
           editButton.onclick = () => enableEdit(index);
           taskItem.appendChild(editButton);
 
+          const updateProgressButton = document.createElement("button");
+          updateProgressButton.innerText = "Update Progress";
+          updateProgressButton.onclick = () => updateProgress(index);
+          taskItem.appendChild(updateProgressButton);
+
           const deleteButton = document.createElement("button");
           deleteButton.innerText = "Delete";
           deleteButton.onclick = () => deleteTask(index);
@@ -142,6 +150,16 @@
       function saveChanges(index, newName, newDueDate) {
         tasks[index].name = newName;
         tasks[index].dueDate = newDueDate;
+        saveTasksToLocalStorage();
+        displayTasks();
+      }
+
+      // Function to update task progress
+      function updateProgress(index) {
+        const statusOptions = ["To-do", "In Progress", "Done"];
+        const currentIndex = statusOptions.indexOf(tasks[index].status);
+        const newIndex = (currentIndex + 1) % statusOptions.length;
+        tasks[index].status = statusOptions[newIndex];
         saveTasksToLocalStorage();
         displayTasks();
       }
@@ -206,6 +224,11 @@
           editButton.onclick = () => enableEdit(index);
           taskItem.appendChild(editButton);
 
+          const updateProgressButton = document.createElement("button");
+          updateProgressButton.innerText = "Update Progress";
+          updateProgressButton.onclick = () => updateProgress(index);
+          taskItem.appendChild(updateProgressButton);
+
           const deleteButton = document.createElement("button");
           deleteButton.innerText = "Delete";
           deleteButton.onclick = () => deleteTask(index);
@@ -233,5 +256,7 @@
       // Initial display of tasks
       displayTasks();
     </script>
+
+    <!-- Add your other script files or CDN links here -->
   </body>
 </html>
