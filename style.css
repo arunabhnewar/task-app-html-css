@@ -18,7 +18,17 @@ body {
 
 .upper-section {
   background-color: #0d0d0d;
+  min-height: 20vh;
+  height: 100%;
+  width: 100%;
+}
+.upper-section .logo {
+  min-height: 200px;
+  height: 100%;
 }
 
 .down-section {
+  width: 100%;
+  height: 80vh;
+  background-color: #191919;
 }
