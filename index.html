@@ -100,7 +100,7 @@
 
           const editButton = document.createElement("button");
           editButton.innerText = "Edit";
-          editButton.onclick = () => editTask(index);
+          editButton.onclick = () => enableEdit(index);
           taskItem.appendChild(editButton);
 
           const deleteButton = document.createElement("button");
@@ -114,14 +114,36 @@
         updateTaskCount();
       }
 
-      // Function to edit a task
-      function editTask(index) {
-        const newTaskName = prompt("Enter new task name:");
-        if (newTaskName !== null) {
-          tasks[index].name = newTaskName;
-          saveTasksToLocalStorage();
-          displayTasks();
-        }
+      // Function to enable editing of a task
+      function enableEdit(index) {
+        const taskItem = document.querySelectorAll(".task-item")[index];
+        const taskInfo = taskItem.querySelector("div");
+
+        const editInput = document.createElement("input");
+        editInput.type = "text";
+        editInput.value = tasks[index].name;
+
+        const dueDateInput = document.createElement("input");
+        dueDateInput.type = "date";
+        dueDateInput.value = tasks[index].dueDate;
+
+        const saveButton = document.createElement("button");
+        saveButton.innerText = "Save";
+        saveButton.onclick = () =>
+          saveChanges(index, editInput.value, dueDateInput.value);
+
+        taskInfo.innerHTML = ""; // Clear existing content
+        taskInfo.appendChild(editInput);
+        taskInfo.appendChild(dueDateInput);
+        taskInfo.appendChild(saveButton);
+      }
+
+      // Function to save changes after editing a task
+      function saveChanges(index, newName, newDueDate) {
+        tasks[index].name = newName;
+        tasks[index].dueDate = newDueDate;
+        saveTasksToLocalStorage();
+        displayTasks();
       }
 
       // Function to delete a task
@@ -181,7 +203,7 @@
 
           const editButton = document.createElement("button");
           editButton.innerText = "Edit";
-          editButton.onclick = () => editTask(index);
+          editButton.onclick = () => enableEdit(index);
           taskItem.appendChild(editButton);
 
           const deleteButton = document.createElement("button");
@@ -211,7 +233,5 @@
       // Initial display of tasks
       displayTasks();
     </script>
-
-    <!-- Add your other script files or CDN links here -->
   </body>
 </html>
