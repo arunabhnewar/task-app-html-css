@@ -146,9 +146,29 @@ body {
 }
 
 .task-item {
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
+  border: 1px solid #333333;
   padding: 10px;
+  max-width: 644px;
+  width: 100%;
+  margin: 20px auto 10px;
+  border-radius: 8px;
+}
+
+.task-item strong {
+  color: #f2f2f2;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+}
+
+.task-item div {
+  color: #8284fa;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 #taskCount {

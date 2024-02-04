@@ -164,7 +164,7 @@
           taskItem.classList.add("task-item");
 
           const taskInfo = document.createElement("div");
-          taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status})`;
+          taskInfo.innerHTML = `<strong>${task.name}</strong> <div>(Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status}) </div> `;
           taskItem.appendChild(taskInfo);
 
           const editButton = document.createElement("button");
