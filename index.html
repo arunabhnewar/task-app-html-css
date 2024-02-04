@@ -14,31 +14,58 @@
         <input type="text" id="taskName" required />
         <label for="dueDate">Due Date:</label>
         <input type="date" id="dueDate" />
+        <label for="priority">Priority:</label>
+        <select id="priority">
+          <option value="high">High</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
         <button type="button" onclick="addTask()">Add Task</button>
       </form>
+
+      <!-- Filter and Search -->
+      <div>
+        <label for="filterStatus">Filter by Status:</label>
+        <select id="filterStatus" onchange="filterTasks()">
+          <option value="all">All</option>
+          <option value="to-do">To-do</option>
+          <option value="in-progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+
+        <label for="filterPriority">Filter by Priority:</label>
+        <select id="filterPriority" onchange="filterTasks()">
+          <option value="all">All</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+
+        <label for="search">Search:</label>
+        <input type="text" id="search" oninput="filterTasks()" />
+      </div>
 
       <!-- Task Display and Interaction -->
       <div id="taskList"></div>
     </div>
 
     <script>
-      // Task list array
-      let tasks = [];
-
       // Function to add a new task
       function addTask() {
         const taskName = document.getElementById("taskName").value;
         const dueDate = document.getElementById("dueDate").value;
+        const priority = document.getElementById("priority").value;
 
         if (taskName.trim() !== "") {
           const task = {
             name: taskName,
             dueDate: dueDate || "No due date",
-            priority: "medium", // default priority
-            status: "To-do", // default status
+            priority: priority,
+            status: "To-do",
           };
 
           tasks.push(task);
+          saveTasksToLocalStorage();
           displayTasks();
           clearInputFields();
         } else {
@@ -46,8 +73,20 @@
         }
       }
 
+      // Function to save tasks to local storage
+      function saveTasksToLocalStorage() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      // Function to get tasks from local storage
+      function getTasksFromLocalStorage() {
+        const storedTasks = localStorage.getItem("tasks");
+        return storedTasks ? JSON.parse(storedTasks) : [];
+      }
+
       // Function to display tasks
       function displayTasks() {
+        tasks = getTasksFromLocalStorage();
         const taskListContainer = document.getElementById("taskList");
         taskListContainer.innerHTML = "";
 
@@ -56,7 +95,7 @@
           taskItem.classList.add("task-item");
 
           const taskInfo = document.createElement("div");
-          taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate})`;
+          taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status})`;
           taskItem.appendChild(taskInfo);
 
           const editButton = document.createElement("button");
@@ -71,6 +110,8 @@
 
           taskListContainer.appendChild(taskItem);
         });
+
+        updateTaskCount();
       }
 
       // Function to edit a task
@@ -78,6 +119,7 @@
         const newTaskName = prompt("Enter new task name:");
         if (newTaskName !== null) {
           tasks[index].name = newTaskName;
+          saveTasksToLocalStorage();
           displayTasks();
         }
       }
@@ -89,6 +131,7 @@
         );
         if (confirmation) {
           tasks.splice(index, 1);
+          saveTasksToLocalStorage();
           displayTasks();
         }
       }
@@ -97,10 +140,78 @@
       function clearInputFields() {
         document.getElementById("taskName").value = "";
         document.getElementById("dueDate").value = "";
+        document.getElementById("priority").value = "medium";
+      }
+
+      // Function to filter tasks based on status, priority, and search
+      function filterTasks() {
+        const filterStatus = document.getElementById("filterStatus").value;
+        const filterPriority = document.getElementById("filterPriority").value;
+        const searchQuery = document
+          .getElementById("search")
+          .value.toLowerCase();
+
+        const filteredTasks = tasks.filter((task) => {
+          const statusMatch =
+            filterStatus === "all" ||
+            task.status.toLowerCase() === filterStatus;
+          const priorityMatch =
+            filterPriority === "all" ||
+            task.priority.toLowerCase() === filterPriority;
+          const searchMatch = task.name.toLowerCase().includes(searchQuery);
+
+          return statusMatch && priorityMatch && searchMatch;
+        });
+
+        displayFilteredTasks(filteredTasks);
+      }
+
+      // Function to display filtered tasks
+      function displayFilteredTasks(filteredTasks) {
+        const taskListContainer = document.getElementById("taskList");
+        taskListContainer.innerHTML = "";
+
+        filteredTasks.forEach((task, index) => {
+          const taskItem = document.createElement("div");
+          taskItem.classList.add("task-item");
+
+          const taskInfo = document.createElement("div");
+          taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status})`;
+          taskItem.appendChild(taskInfo);
+
+          const editButton = document.createElement("button");
+          editButton.innerText = "Edit";
+          editButton.onclick = () => editTask(index);
+          taskItem.appendChild(editButton);
+
+          const deleteButton = document.createElement("button");
+          deleteButton.innerText = "Delete";
+          deleteButton.onclick = () => deleteTask(index);
+          taskItem.appendChild(deleteButton);
+
+          taskListContainer.appendChild(taskItem);
+        });
+
+        updateTaskCount();
+      }
+
+      // Function to update task count
+      function updateTaskCount() {
+        const taskCountContainer = document.getElementById("taskCount");
+        const taskCount = {
+          "to-do": tasks.filter((task) => task.status === "To-do").length,
+          "in-progress": tasks.filter((task) => task.status === "In Progress")
+            .length,
+          done: tasks.filter((task) => task.status === "Done").length,
+        };
+
+        taskCountContainer.innerHTML = `To-Do: ${taskCount["to-do"]} | In Progress: ${taskCount["in-progress"]} | Done: ${taskCount["done"]}`;
       }
 
       // Initial display of tasks
       displayTasks();
     </script>
+
+    <!-- Add your other script files or CDN links here -->
   </body>
 </html>
