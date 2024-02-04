@@ -164,3 +164,21 @@ body {
 .down-section .completed-head {
   margin-top: 15px;
 }
+
+/* single todo */
+.down-section .single-todo {
+  color: #f2f2f2;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  background: #262626;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #333333;
+  margin-bottom: 12px;
+}
+
+.down-section .completed-task {
+  text-decoration: line-through;
+  color: #808080;
+}
