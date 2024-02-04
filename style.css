@@ -78,3 +78,36 @@ body {
   color: #f2f2f2;
   border: 1px solid #1e6f9f;
 }
+
+.down-section .list-head {
+  width: 100%;
+  padding-top: 173px;
+  max-width: 736px;
+  width: 100%;
+  max-width: 736px;
+  width: 100%;
+  margin: auto;
+}
+
+.down-section .todo-list .todo-head-text {
+  color: #4ea8de;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.down-section .todo-list .hight-priority-text {
+  color: #8284fa;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.down-section .todo-list .count {
+  background: #333333;
+  color: #d9d9d9;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 50%;
+}
