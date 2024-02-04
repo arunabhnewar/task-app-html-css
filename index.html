@@ -7,10 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous" />
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
     <style>
       #app {
@@ -170,6 +168,11 @@
           updateProgressButton.onclick = () => updateProgress(index);
           taskItem.appendChild(updateProgressButton);
 
+          const updatePriorityButton = document.createElement("button");
+          updatePriorityButton.innerText = "Update Priority";
+          updatePriorityButton.onclick = () => updatePriority(index);
+          taskItem.appendChild(updatePriorityButton);
+
           const deleteButton = document.createElement("button");
           deleteButton.innerText = "Delete";
           deleteButton.onclick = () => deleteTask(index);
@@ -194,21 +197,39 @@
         dueDateInput.type = "date";
         dueDateInput.value = tasks[index].dueDate;
 
+        const priorityInput = document.createElement("select");
+        priorityInput.id = "priorityInput";
+        const priorityOptions = ["high", "medium", "low"];
+        priorityOptions.forEach((opt) => {
+          const option = document.createElement("option");
+          option.value = opt;
+          option.text = opt.charAt(0).toUpperCase() + opt.slice(1);
+          priorityInput.appendChild(option);
+        });
+        priorityInput.value = tasks[index].priority;
+
         const saveButton = document.createElement("button");
         saveButton.innerText = "Save";
         saveButton.onclick = () =>
-          saveChanges(index, editInput.value, dueDateInput.value);
+          saveChanges(
+            index,
+            editInput.value,
+            dueDateInput.value,
+            priorityInput.value
+          );
 
         taskInfo.innerHTML = ""; // Clear existing content
         taskInfo.appendChild(editInput);
         taskInfo.appendChild(dueDateInput);
+        taskInfo.appendChild(priorityInput);
         taskInfo.appendChild(saveButton);
       }
 
       // Function to save changes after editing a task
-      function saveChanges(index, newName, newDueDate) {
+      function saveChanges(index, newName, newDueDate, newPriority) {
         tasks[index].name = newName;
         tasks[index].dueDate = newDueDate;
+        tasks[index].priority = newPriority;
         saveTasksToLocalStorage();
         displayTasks();
       }
@@ -219,6 +240,16 @@
         const currentIndex = statusOptions.indexOf(tasks[index].status);
         const newIndex = (currentIndex + 1) % statusOptions.length;
         tasks[index].status = statusOptions[newIndex];
+        saveTasksToLocalStorage();
+        displayTasks();
+      }
+
+      // Function to update task priority
+      function updatePriority(index) {
+        const priorityOptions = ["high", "medium", "low"];
+        const currentIndex = priorityOptions.indexOf(tasks[index].priority);
+        const newIndex = (currentIndex + 1) % priorityOptions.length;
+        tasks[index].priority = priorityOptions[newIndex];
         saveTasksToLocalStorage();
         displayTasks();
       }
@@ -283,6 +314,11 @@
           editButton.onclick = () => enableEdit(index);
           taskItem.appendChild(editButton);
 
+          const updatePriorityButton = document.createElement("button");
+          updatePriorityButton.innerText = "Update Priority";
+          updatePriorityButton.onclick = () => updatePriority(index);
+          taskItem.appendChild(updatePriorityButton);
+
           const updateProgressButton = document.createElement("button");
           updateProgressButton.innerText = "Update Progress";
           updateProgressButton.onclick = () => updateProgress(index);
@@ -317,13 +353,8 @@
     </script>
 
     <!-- Bootstrap JS and Popper.js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
