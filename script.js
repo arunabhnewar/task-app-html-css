@@ -201,30 +201,40 @@ function displayFilteredTasks(filteredTasks) {
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item");
 
+    // const taskInfo = document.createElement("div");
+    // taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status})`;
     const taskInfo = document.createElement("div");
-    taskInfo.innerHTML = `<strong>${task.name}</strong> (Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status})`;
+    taskInfo.classList.add("task_info");
+    taskInfo.innerHTML = `<strong>${task.name}</strong> <div>(Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status}) </div>`;
     taskItem.appendChild(taskInfo);
+
+    const buttonsGroup = document.createElement("div");
+    buttonsGroup.classList.add("buttons_groups");
 
     const editButton = document.createElement("button");
     editButton.innerText = "Edit";
     editButton.onclick = () => enableEdit(index);
-    taskItem.appendChild(editButton);
+    buttonsGroup.appendChild(editButton);
 
     const updatePriorityButton = document.createElement("button");
     updatePriorityButton.innerText = "Update Priority";
     updatePriorityButton.onclick = () => updatePriority(index);
-    taskItem.appendChild(updatePriorityButton);
+    buttonsGroup.appendChild(updatePriorityButton);
 
     const updateProgressButton = document.createElement("button");
     updateProgressButton.innerText = "Update Progress";
     updateProgressButton.onclick = () => updateProgress(index);
-    taskItem.appendChild(updateProgressButton);
+    buttonsGroup.appendChild(updateProgressButton);
 
     const deleteButton = document.createElement("button");
     deleteButton.innerText = "Delete";
     deleteButton.onclick = () => deleteTask(index);
-    taskItem.appendChild(deleteButton);
+    buttonsGroup.appendChild(deleteButton);
 
+    // Append buttonsGroup to taskItem
+    taskItem.appendChild(buttonsGroup);
+
+    // Append taskItem to taskListContainer
     taskListContainer.appendChild(taskItem);
   });
 
