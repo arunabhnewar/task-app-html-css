@@ -12,95 +12,101 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous" />
 
-    <style>
-      #app {
-        margin: 20px;
-      }
-
-      #taskForm {
-        margin-bottom: 20px;
-      }
-
-      .task-item {
-        border: 1px solid #ddd;
-        margin-bottom: 10px;
-        padding: 10px;
-      }
-    </style>
+    <!-- custom css style -->
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div id="app" class="container">
-      <!-- Task Input and Management -->
-      <form id="taskForm" class="form-inline">
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="taskName" class="sr-only">Task Name:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="taskName"
-            placeholder="Task Name"
-            required />
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="dueDate" class="sr-only">Due Date:</label>
-          <input type="date" class="form-control" id="dueDate" />
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-          <label for="priority" class="sr-only">Priority:</label>
-          <select id="priority" class="form-control">
-            <option value="high">High</option>
-            <option value="medium" selected>Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
-        <button type="button" class="btn btn-primary mb-2" onclick="addTask()">
-          Add Task
-        </button>
-      </form>
-
-      <!-- Filter and Search -->
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="filterStatus">Filter by Status:</label>
-          <select
-            id="filterStatus"
-            class="form-control"
-            onchange="filterTasks()">
-            <option value="all">All</option>
-            <option value="to-do">To-do</option>
-            <option value="in-progress">In Progress</option>
-            <option value="done">Done</option>
-          </select>
-        </div>
-
-        <div class="form-group col-md-4">
-          <label for="filterPriority">Filter by Priority:</label>
-          <select
-            id="filterPriority"
-            class="form-control"
-            onchange="filterTasks()">
-            <option value="all">All</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
-
-        <div class="form-group col-md-4">
-          <label for="search">Search:</label>
-          <input
-            type="text"
-            id="search"
-            class="form-control"
-            oninput="filterTasks()" />
+    <div id="app">
+      <div class="upper-section">
+        <div class="logo d-flex justify-content-center align-items-center">
+          <img src="./assets/logo.svg" alt="" srcset="" />
         </div>
       </div>
 
-      <!-- Task Display and Interaction -->
-      <div id="taskList"></div>
+      <div class="down-section">
+        <!-- Task Input and Management -->
+        <form
+          id="taskForm"
+          class="add-task-input d-flex justify-content-center mx-auto">
+          <!-- Task Name field -->
+          <div class="form-group mx-sm-1 mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="taskName"
+              placeholder="Enter Your To-do List Task"
+              required />
+          </div>
 
-      <!-- Task Count -->
-      <div id="taskCount"></div>
+          <!-- Due date field -->
+          <div class="form-group mx-sm-1 mb-2">
+            <input type="date" class="form-control" id="dueDate" />
+          </div>
+
+          <!-- Priority Field -->
+          <div class="form-group mx-sm-1 mb-2">
+            <select id="priority" class="form-control">
+              <option value="priority" selected disabled>Priority</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <!-- Task add button -->
+          <button
+            type="button"
+            class="d-flex justify-content-center align-items-center"
+            onclick="addTask()">
+            <span>Add</span>
+            <img src="./assets/add.svg" alt="" />
+          </button>
+        </form>
+
+        <!-- Filter and Search -->
+        <div class="filter_section d-flex justify-content-center mx-auto gap-3">
+          <div class="form-group">
+            <label for="filterStatus">Filter by Status:</label>
+            <select
+              id="filterStatus"
+              class="form-control"
+              onchange="filterTasks()">
+              <option value="all">All</option>
+              <option value="to-do">To-do</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="filterPriority">Filter by Priority:</label>
+            <select
+              id="filterPriority"
+              class="form-control"
+              onchange="filterTasks()">
+              <option value="all">All</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="search">Search:</label>
+            <input
+              type="text"
+              id="search"
+              class="form-control"
+              oninput="filterTasks()" />
+          </div>
+        </div>
+
+        <!-- Task Display and Interaction -->
+        <div id="taskList"></div>
+
+        <!-- Task Count -->
+        <div id="taskCount"></div>
+      </div>
     </div>
 
     <!-- Bootstrap JS and Popper.js -->
