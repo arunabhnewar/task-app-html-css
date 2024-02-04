@@ -159,73 +159,41 @@
         const taskListContainer = document.getElementById("taskList");
         taskListContainer.innerHTML = "";
 
-        // tasks.forEach((task, index) => {
-        //   const taskItem = document.createElement("div");
-        //   taskItem.classList.add("task-item");
-
-        //   const taskInfo = document.createElement("div");
-        //   taskInfo.innerHTML = `<strong>${task.name}</strong> <div>(Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status}) </div> `;
-        //   taskItem.appendChild(taskInfo);
-
-        //   taskInfo.innerHTML = "";
-        //   const editButton = document.createElement("button");
-        //   editButton.innerText = "Edit";
-        //   editButton.onclick = () => enableEdit(index);
-        //   taskItem.appendChild(editButton);
-
-        //   const updateProgressButton = document.createElement("button");
-        //   updateProgressButton.innerText = "Update Progress";
-        //   updateProgressButton.onclick = () => updateProgress(index);
-        //   taskItem.appendChild(updateProgressButton);
-
-        //   const updatePriorityButton = document.createElement("button");
-        //   updatePriorityButton.innerText = "Update Priority";
-        //   updatePriorityButton.onclick = () => updatePriority(index);
-        //   taskItem.appendChild(updatePriorityButton);
-
-        //   const deleteButton = document.createElement("button");
-        //   deleteButton.innerText = "Delete";
-        //   deleteButton.onclick = () => deleteTask(index);
-        //   taskItem.appendChild(deleteButton);
-
-        //   taskListContainer.appendChild(taskItem);
-        // });
-
         tasks.forEach((task, index) => {
           const taskItem = document.createElement("div");
           taskItem.classList.add("task-item");
 
           const taskInfo = document.createElement("div");
+          taskInfo.classList.add("task_info");
           taskInfo.innerHTML = `<strong>${task.name}</strong> <div>(Due: ${task.dueDate}, Priority: ${task.priority}, Status: ${task.status}) </div>`;
 
           // Create a div to hold the buttons
-          const buttonsDiv = document.createElement("div");
+          const buttonsGroup = document.createElement("div");
+          buttonsGroup.classList.add("buttons_groups");
 
           const editButton = document.createElement("button");
           editButton.innerText = "Edit";
           editButton.onclick = () => enableEdit(index);
-          buttonsDiv.appendChild(editButton);
+          buttonsGroup.appendChild(editButton);
 
           const updateProgressButton = document.createElement("button");
           updateProgressButton.innerText = "Update Progress";
           updateProgressButton.onclick = () => updateProgress(index);
-          buttonsDiv.appendChild(updateProgressButton);
+          buttonsGroup.appendChild(updateProgressButton);
 
           const updatePriorityButton = document.createElement("button");
           updatePriorityButton.innerText = "Update Priority";
           updatePriorityButton.onclick = () => updatePriority(index);
-          buttonsDiv.appendChild(updatePriorityButton);
+          buttonsGroup.appendChild(updatePriorityButton);
 
           const deleteButton = document.createElement("button");
           deleteButton.innerText = "Delete";
           deleteButton.onclick = () => deleteTask(index);
-          buttonsDiv.appendChild(deleteButton);
+          buttonsGroup.appendChild(deleteButton);
 
-          // Append buttonsDiv to taskInfo
-          taskInfo.appendChild(buttonsDiv);
-
-          // Append taskInfo to taskItem
+          // Append buttonsGroup to taskItem
           taskItem.appendChild(taskInfo);
+          taskItem.appendChild(buttonsGroup);
 
           // Append taskItem to taskListContainer
           taskListContainer.appendChild(taskItem);
@@ -259,6 +227,7 @@
         priorityInput.value = tasks[index].priority;
 
         const saveButton = document.createElement("button");
+        saveButton.classList.add("save_btn");
         saveButton.innerText = "Save";
         saveButton.onclick = () =>
           saveChanges(
