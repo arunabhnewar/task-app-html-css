@@ -32,3 +32,40 @@ body {
   height: 80vh;
   background-color: #191919;
 }
+
+.down-section .add-task-input {
+  max-width: 736px;
+  width: 100%;
+  gap: 8px;
+}
+
+.down-section .add-task-input input {
+  max-width: 644px;
+  width: 100%;
+  max-height: 54px;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid #262626;
+  background-color: #262626;
+  color: #f2f2f2;
+}
+.down-section .add-task-input input::placeholder {
+  color: #808080;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.down-section .add-task-input input:focus {
+  box-shadow: none !important;
+}
+
+.down-section .add-task-input button {
+  background: #1e6f9f;
+  padding: 16px;
+  gap: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f2f2f2;
+  border: 1px solid #1e6f9f;
+}
