@@ -79,14 +79,54 @@ body {
   border: 1px solid #1e6f9f;
 }
 
+.down-section .todo-list {
+  width: 100%;
+  max-width: 736px;
+  margin: auto;
+}
+
+/* List heading */
 .down-section .list-head {
   width: 100%;
-  padding-top: 173px;
+  padding-top: 64px;
+  max-width: 736px;
+  margin: auto;
+}
+
+.down-section .started-head,
+.down-section .completed-head {
   max-width: 736px;
   width: 100%;
   max-width: 736px;
   width: 100%;
   margin: auto;
+}
+
+.down-section .start-divider {
+  height: 1px;
+  max-width: 736px;
+  width: 100%;
+  margin: auto;
+  margin-top: 12px;
+  background: #333333;
+}
+
+.down-section .complete-divider {
+  height: 1px;
+  max-width: 736px;
+  width: 100%;
+  margin: auto;
+  margin-top: 15px;
+  background: #333333;
+}
+
+.down-section .todo-list .divider {
+  height: 1px;
+  max-width: 736px;
+  width: 100%;
+  margin: auto;
+  margin-top: 24px;
+  background: #333333;
 }
 
 .down-section .todo-list .todo-head-text {
@@ -110,4 +150,17 @@ body {
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 50%;
+}
+
+/* no to part */
+.down-section .no-to-do {
+  width: 100%;
+  margin-top: 64px;
+}
+
+.down-section .started-head {
+  margin-top: 25px;
+}
+.down-section .completed-head {
+  margin-top: 15px;
 }
